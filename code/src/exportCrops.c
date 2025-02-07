@@ -81,13 +81,13 @@ static void drawBoundingBox(t_image *image, t_object *object, t_cropRange crop)
 {
 	for (int x = crop.minX; x < crop.maxX; x++)
 	{
-		image->pixels[crop.minY][x] = object->label;
-		image->pixels[crop.maxY][x] = object->label;
+		image->pixels[crop.minY][x] = -1;
+		image->pixels[crop.maxY][x] = -1;
 	}
 	for (int y = crop.minY; y < crop.maxY; y++)
 	{
-		image->pixels[y][crop.minX] = object->label;
-		image->pixels[y][crop.maxX] = object->label;
+		image->pixels[y][crop.minX] = -1;
+		image->pixels[y][crop.maxX] = -1;
 	}
 }
 

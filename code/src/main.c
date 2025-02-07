@@ -18,6 +18,8 @@ void	image_printInfo(t_image *image)
 				continue ;
 			if (image->pixels[i][j] > 0)
 				printf("%c ", image->pixels[i][j] + 48);
+			else if (image->pixels[i][j] < 0)
+				printf("##");
 			else
 				printf("  ");
 		}
