@@ -17,6 +17,7 @@ pwd
 - run the executbale 'crop' with your input file
 > (exclude the '<' and '>' symbols, everything inside '{ }' is optional, including the symbols)
 > filename may instead be the relative or absolute path to the file
+> always put the filename in quotes " or ' if it has any spaces or other non-alphanumerical characters
 ```
 ./crop <filename> {-v > output}
 ```
