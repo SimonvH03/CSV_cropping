@@ -1,8 +1,24 @@
 # CSV_cropping
-automatically detects objects within scan result, creates cropped copies of csv file.
+Automatically detects objects within scan result, creates cropped copies of csv file.
 
-compile with "> make"
+# How to use
+- open a terminal (in VSCode) and run the command:
+```
+git clone https://github.com/SimonvH03/CSV_cropping.git
+```
 
-run with "> ./crop \<filename\>"
+- place files you want to crop in the root directory (main folder) or ./resources/ or wherever you like
 
-visit config.h to set parameters.
+- run the executbale 'crop' with your input file 
+```
+./crop <filename> {-v > output}
+```
+
+> using the flag -v (or --verbose) adds an ascii preview to the output, it shows the borders of the cropped exported csv files.
+> it's recommended to also redirect the output when using this flag
+
+- change defined values in config.h to set parameters.
+!note: to recompile after making changes to the configuration run the command:
+```
+make (all, re, clean, fclean)
+```
