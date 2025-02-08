@@ -94,7 +94,7 @@ static void drawBoundingBox(t_image *image, t_object *object, t_cropRange *crop)
 	}
 	for (int y = crop->minY; y < crop->maxY; y++)
 	{
-		for (int x = 0; x <= SCALE; x++)
+		for (int x = 0; x < SCALE; x++)
 		{
 			if (!(crop->minX + x < 0 || crop->minX + x >= image->width
 				|| y < 0 || y >= image->height))
