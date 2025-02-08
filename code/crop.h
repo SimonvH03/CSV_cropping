@@ -82,6 +82,6 @@ int		findCenters(t_image *image);
 
 // readCsv.c
 void	image_init(t_image *image, int fd);
-int		image_readCsv(t_image *image, int fd);
+void	image_readCsv(t_image *image, int fd);
 
 #endif
