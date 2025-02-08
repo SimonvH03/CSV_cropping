@@ -19,7 +19,7 @@ pwd
 > filename may instead be the relative or absolute path to the file
 > always put the filename in quotes " or ' if it has any spaces or other non-alphanumerical characters
 ```
-./crop <filename> {-v > output}
+./crop <filename> {-v} {>output}
 ```
 
 > using the flag -v (or --verbose) adds an ascii preview to the output, it shows the borders of the cropped exported csv files.
