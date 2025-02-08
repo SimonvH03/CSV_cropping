@@ -7,9 +7,10 @@ Automatically detects objects within scan result, creates cropped copies of csv 
 git clone https://github.com/SimonvH03/CSV_cropping.git
 ```
 
-- place files you want to crop in the root directory (main folder) or ./resources/ or wherever you like
+- place files you want to crop in the root directory (main folder) or wherever you like
 
-- run the executbale 'crop' with your input file 
+- run the executbale 'crop' with your input file
+> filename may instead be the relative or absolute path to the file
 ```
 ./crop <filename> {-v > output}
 ```
