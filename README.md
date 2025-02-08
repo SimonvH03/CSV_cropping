@@ -18,7 +18,7 @@ git clone https://github.com/SimonvH03/CSV_cropping.git
 > it's recommended to also redirect the output when using this flag
 
 - change defined values in config.h to set parameters.
-> !to recompile after making changes to the configuration run the command:
+> !!! to recompile after making changes to the configuration run the command:
 ```
 make (all, re, clean, fclean)
 ```
