@@ -6,7 +6,7 @@ void	image_printInfo(t_image *image)
 	printf("TEST PRINT W/H %d/%d\n\n", image->width, image->height);
 
 	// adjust scale for more precise or more managable output (skips n pixels per readout)
-	const int scale = SCALE;
+	const int scale = 1;
 
 	for (int i = 0; i < image->height; i++)
 	{
@@ -19,7 +19,7 @@ void	image_printInfo(t_image *image)
 			if (image->pixels[i][j] > 0)
 				printf("%c ", image->pixels[i][j] + 48);
 			else if (image->pixels[i][j] < 0)
-				printf("##");
+				printf("# ");
 			else
 				printf("  ");
 		}
@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 	{
 		printf("Usage: %s <filename.csv>\n", argv[0]);
+		printf("add flag '-v' or '--verbose' for ascii preview (redirecting '>outfile' recommended)\n");
 		return (1);
 	}
 

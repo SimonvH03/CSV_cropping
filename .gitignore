@@ -2,4 +2,4 @@ resources/
 *.o
 *.a
 *.csv
-output
+output*

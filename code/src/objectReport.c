@@ -127,6 +127,19 @@ static void floodFill(t_seeker *cs, t_object *object, int startX, int startY)
 	free(queue);
 }
 
+static void drawCenter(t_image *image, t_object *object)
+{
+	for (int i = -(SCALE / 2); i <= (SCALE / 2); i++)
+	{
+		for (int j = -(SCALE / 2); j <= (SCALE / 2); j++)
+		{
+			if (!(object->centerY + i < 0 || object->centerY + i >= image->height
+				|| object->centerX + j < 0 || object->centerX + j >= image->width))
+				image->pixels[object->centerY + i][object->centerX + j] = -1;
+		}
+	}
+}
+
 static void	reportCenters(t_seeker *cs, t_image *image)
 {
 	printf("\nDetected %d objects.\n", cs->objectCount - 1);
@@ -145,10 +158,9 @@ static void	reportCenters(t_seeker *cs, t_image *image)
 			printf("Object %d is probably tape: detected on %d/8 corners or edges\n", object->label, check);
 		else
 		{
-			image->pixels[object->centerY][object->centerX] = -1;
-
 			printf("Object %d with center (%d, %d) and bounding box (%d, %d) <> (%d, %d)\n",
 				object->label, object->centerY, object->centerX, object->minY, object->minX, object->maxY, object->maxX);
+			drawCenter(image, object);
 			addValidObject(image, object);
 		}
 	}

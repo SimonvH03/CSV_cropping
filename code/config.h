@@ -16,18 +16,18 @@
 // Adjust below values for desired fromatting of output csv files
 
 // set only one of the following to force centering or bounding box cropping mode, default is a combination of both
-# define FORCE_BOUNDINGBOX		0
-# define FORCE_CENTER			1
+# define FORCE_BOUNDINGBOX		1
+# define FORCE_CENTER			0
 
 // default will crop new file to bounding box of a strawberry, with a margin of B_MARGIN pixels
 //  width or heihgt of new csv file will not exceed C_WIDTH or C_HEIGHT respectively
 # define BOUNDINGBOX_MARGIN		10				
-# define CENTER_WIDTH			60
-# define CENTER_HEIGHT			60
+# define CENTER_WIDTH			100
+# define CENTER_HEIGHT			100
 
 // note that an object's center is it's weighted center, not the center of it's bounding box
 
 // scale for output, 1 will print every pixel, 2 will skip every other pixel, etc.
-#  define SCALE					1
+#  define SCALE					5
 
 #endif

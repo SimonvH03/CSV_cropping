@@ -77,17 +77,31 @@ static int	exportObject(int fd_in, t_cropRange crop, char *filename)
 	free(filename);
 }
 
-static void drawBoundingBox(t_image *image, t_object *object, t_cropRange crop)
+static void drawBoundingBox(t_image *image, t_object *object, t_cropRange *crop)
 {
-	for (int x = crop.minX; x < crop.maxX; x++)
+	for (int x = crop->minX; x < crop->maxX; x++)
 	{
-		image->pixels[crop.minY][x] = -1;
-		image->pixels[crop.maxY][x] = -1;
+		for (int y = 0; y <= SCALE; y++)
+		{
+			if (!(x < 0 || x >= image->width
+				|| crop->minY + y < 0 || crop->minY + y >= image->height))
+				image->pixels[crop->minY + y][x] = -1;
+			if (!(x < 0 || x >= image->width
+				|| crop->maxY - y < 0 || crop->maxY - y >= image->height))
+				image->pixels[crop->maxY - y][x] = -1;
+		}
 	}
-	for (int y = crop.minY; y < crop.maxY; y++)
+	for (int y = crop->minY; y < crop->maxY; y++)
 	{
-		image->pixels[y][crop.minX] = -1;
-		image->pixels[y][crop.maxX] = -1;
+		for (int x = 0; x <= SCALE; x++)
+		{
+			if (!(crop->minX + x < 0 || crop->minX + x >= image->width
+				|| y < 0 || y >= image->height))
+				image->pixels[y][crop->minX + x] = -1;
+			if (!(crop->maxX - x < 0 || crop->maxX - x >= image->width
+				|| y < 0 || y >= image->height))
+				image->pixels[y][crop->maxX - x] = -1;
+		}
 	}
 }
 
@@ -131,7 +145,7 @@ int exportAllObjects(t_image *image, char *filename)
 		determineCrop(&cropRange, object, image->height, image->width);
 		exportObject(fd, cropRange, newFilename(filename, object->label));
 		close(fd);
-		drawBoundingBox(image, object, cropRange);
+		drawBoundingBox(image, object, &cropRange);
 		object = object->next;
 	}
 	printf("Exported %d cropped files from %s\n\n", count, filename);
