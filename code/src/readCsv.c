@@ -51,7 +51,7 @@ static int	pixel_isStrawberry(t_image *image, char *entry, int x, int y)
 	return (false);
 }
 
-int	image_readCsv(t_image *image, int fd)
+void	image_readCsv(t_image *image, int fd)
 {
 	char	*entry;
 	int		x;
