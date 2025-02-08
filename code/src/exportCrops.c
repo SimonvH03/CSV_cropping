@@ -7,13 +7,13 @@ static void	determineCrop(t_cropRange *crop, t_object *object, int height, int w
 	crop->maxY = object->maxY + BOUNDINGBOX_MARGIN;
 	crop->maxX = object->maxX + BOUNDINGBOX_MARGIN;
 	if ((crop->maxY - crop->minY > CENTER_HEIGHT)
-		&& (FORCE_BOUNDINGBOX != 1 || FORCE_CENTER == 1))
+		&& (FORCE_CENTER == 1))
 	{
 		crop->minY = object->centerY - CENTER_HEIGHT / 2;
 		crop->maxY = object->centerY + CENTER_HEIGHT / 2;
 	}
 	if ((crop->maxX - crop->minX > CENTER_WIDTH)
-		&& (FORCE_BOUNDINGBOX != 1 || FORCE_CENTER == 1))
+		&& (FORCE_CENTER == 1))
 	{
 		crop->minX = object->centerX - CENTER_WIDTH / 2;
 		crop->maxX = object->centerX + CENTER_WIDTH / 2;
