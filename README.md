@@ -6,8 +6,13 @@ Automatically detects objects within scan result, creates cropped copies of csv 
 ```
 git clone https://github.com/SimonvH03/CSV_cropping.git
 ```
-
-- place files you want to crop in the root directory (main folder) or wherever you like
+- navigate to the directory 'code' in your terminal
+```
+cd CSV_cropping
+cd code
+pwd
+```
+- place files you want to crop in the directory ./code or wherever you like
 
 - run the executbale 'crop' with your input file (exclude the '<' and '>' symbols, and { } means optional)
 > filename may instead be the relative or absolute path to the file
