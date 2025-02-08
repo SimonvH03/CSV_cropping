@@ -75,6 +75,7 @@ static int	exportObject(int fd_in, t_cropRange crop, char *filename)
 	}
 	printf("Succesfully Exported %s ( %d x %d )\n", filename, crop.maxX - crop.minX, crop.maxY - crop.minY);
 	free(filename);
+	return (0);
 }
 
 static void drawBoundingBox(t_image *image, t_object *object, t_cropRange *crop)
