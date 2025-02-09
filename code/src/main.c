@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	}
 
 	// read from csv file into image 'pixel'data
-	image_readCsv(&image, fd)
+	image_readCsv(&image, fd);
 
 	close(fd);
 
