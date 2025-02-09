@@ -6,7 +6,7 @@ void	image_printInfo(t_image *image)
 	printf("TEST PRINT W/H %d/%d\n\n", image->width, image->height);
 
 	// adjust scale for more precise or more managable output (skips n pixels per readout)
-	const int scale = 1;
+	const int scale = SCALE;
 
 	for (int i = 0; i < image->height; i++)
 	{
