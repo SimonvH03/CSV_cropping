@@ -7,6 +7,11 @@ Automatically detects objects within scan result, creates cropped copies of csv 
 ```
 git clone https://github.com/SimonvH03/CSV_cropping.git
 ```
+- navigate to the cloned directory in your terminal
+```
+cd CSV_cropping
+pwd
+```
 
 ### If you already have this repository cloned:
 - open a terminal at the repository and run the commands:
@@ -17,12 +22,6 @@ pwd
 git checkout .
 git stash
 git pull
-```
-
-- navigate to the cloned directory in your terminal
-```
-cd CSV_cropping
-pwd
 ```
 
 - place files you want to crop in the directory ./data or wherever you like
