@@ -11,7 +11,7 @@
 // changing values of these defined constants will change the behaviour of the program.
 // NEVER change the NAME of a constant, only the value.
 // NEVER include symbols like #, <, >, = or ; in the values of the defined constants
-// The comments refer to values with >these bois< around them, you will not
+// The comments (me, here, the green text you're reading) will refer to values with >these bois< around them, you will not
 // MAKE SURE to keep values of the same TYPE, e.g. >200< can not become >true< , and >"0.05"< can not become >0.05<
 // set to >true< to enable, >false< to disable. (without the > and <, in case you missed it)
 
