@@ -15,8 +15,8 @@
 // MAKE SURE to keep values the same TYPE, e.g. >200< can not become >true< , and >"0.05"< can not become >0.05<
 // set to >true< to enable, >false< to disable. (without the > and <, in case you missed it)
 
-// # define INPUT_FILE			"data/test_crop_1.csv"
-# define INPUT_FILE			"data/test.csv"
+// reminder that absolute paths are jank, use the relative path
+# define INPUT_FILE			"data/myinputfilenamegoeshere.csv"
 
 // SET CROPPING MODE
 // if >true<, find objects of interest based on wavelength, size, and sensitivity THRESHOLDS
