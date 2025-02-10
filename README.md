@@ -30,6 +30,7 @@ git pull
 - visit config.h and read it carefully
 > change defined constant values in config.h to set parameters.
 
+- make sure your input file (relative path, data/inputfile.csv) is defined
 - run the program with the provided script
 ```
 bash run.sh
