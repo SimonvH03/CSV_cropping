@@ -15,8 +15,8 @@ pwd
 
 ### or Update the version you already have:
 - open a terminal at the cloned directory and run the commands:
-> don't forget to include the '.'  
-> if pwd does not correspond with the folder of your current install, navigate there with the command 'cd'
+> if pwd does not correspond with the folder of your current install, navigate there with the command 'cd'  
+> don't forget to include the '.'
 ```
 pwd
 git checkout .
