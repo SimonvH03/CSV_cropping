@@ -9,11 +9,11 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <errno.h>
+# include <string.h>
 
-# include "config.h"
+# include "../config.h"
 
-// INTERNALS
-// image in memory will be filled with 1s and 0s
 # define STRAWBERRY		1
 # define EMPTY 			0
 
@@ -74,14 +74,22 @@ typedef struct s_image
 
 // FUNCTIONS
 
+// centralcrop/
+int		centralcrop(t_image *image, char *filename);
+
+
+// autocrop
+int		autocrop(t_image *image, char *filename);
 // exportCrops.c
-int		exportAllObjects(t_image *image, char *filename);
-
+int		exportObject(t_image *image, t_object *object, char *filename);
 // centerReport.c
-int		findCenters(t_image *image);
-
+int		findObjects(t_image *image);
 // readCsv.c
-void	image_init(t_image *image, int fd);
-void	image_readCsv(t_image *image, int fd);
+int		image_init(t_image *image, char *filename);
+int		image_readCsv(t_image *image, char *filename);
+
+// utils (main.c)
+int		memory_error();
+int		open_inputfile(char *filename);
 
 #endif

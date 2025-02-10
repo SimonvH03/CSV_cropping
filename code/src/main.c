@@ -1,90 +1,56 @@
-#include "../crop.h"
+#include "crop.h"
 
-// using printf to utilize buffering for better performance
-void	image_printInfo(t_image *image)
+int	memory_error()
 {
-	printf("TEST PRINT W/H %d/%d\n\n", image->width, image->height);
-
-	// adjust scale for more precise or more managable output (skips n pixels per readout)
-	const int scale = SCALE;
-
-	for (int i = 0; i < image->height; i++)
-	{
-		if ((i % scale))
-			continue ;
-		for (int j = 0; j < image->width; j++)
-		{
-			if ((j % scale))
-				continue ;
-			if (image->pixels[i][j] > 0)
-				printf("%c ", image->pixels[i][j] + 48);
-			else if (image->pixels[i][j] < 0)
-				printf("# ");
-			else
-				printf("  ");
-		}
-		printf("\n");
-	}
+	printf("\e[31mERROR: Memory allocation failed");
+	return (RETURN_ERROR);
 }
 
-static void clear(t_image *image)
+int	open_inputfile(char *filename)
 {
-	for (int i = 0; i < image->height; i++)
-		free(image->pixels[i]);
-	free(image->pixels);
-	t_object *object = image->valids;
-	while (object)
+	int fd = open(filename, O_RDONLY);
+
+	if (fd == -1)
 	{
-		t_object *next = object->next;
-		free(object);
-		object = next;
+		printf("Error: Could not open file '%s': %s\n", filename, strerror(errno));
+		return (-1);
 	}
+	return (fd);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
+	int		return_value;
 	t_image	image;
-	int		fd;
 
-	if (argc < 2)
+	if (AUTO_DETECTION == true)
 	{
-		printf("Usage: %s <filename.csv>\n", argv[0]);
-		printf("add flag '-v' or '--verbose' for ascii preview (redirecting '>outfile' recommended)\n");
-		return (1);
+		printf("📂 Running Program in AUTO_DETECTION mode...\n");
+		printf("📄 \e[33mInput File: \e[32m>> %s <<\e[0m\n", INPUT_FILE);
+		printf("⚙️ \e[33m Parameters:\e[0m\nWavelength:\tindex %d\nSensitivity:\t%s\nObject Size:\t%d pixels\n",
+			WAVELENGTH_THRESHOLD, SENSITIVITY_THRESHOLD, OBJECT_SIZE_THRESHOLD);
+		if (CROP_SIZE_LIMIT == true)
+			printf("File Size:\t%d x %d pixels\n", MAX_CROP_SIZE, MAX_CROP_SIZE);
+		else
+			printf("File Size:\t n.a.\n");
+		return_value = autocrop(&image, INPUT_FILE);
+		if (return_value != RETURN_SUCCESS)
+		{
+			printf("\e[31mError executing 'autocrop', exiting program...\e[0m\n");
+			return (return_value);
+		}
 	}
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	else
 	{
-		printf("Error: Could not open file %s\n", argv[1]);
-		return (1);
+		printf("📂 Running Program in CENTRAL_SQUARE mode...\n");
+		printf("📄 \e[33mInput File: \e[32m>> %s <<\e[0m\n", INPUT_FILE);
+		printf("\e[33m⚙️  Parameters:\e[0m\nFile Size:\t%d x %d\n", CROP_WIDTH, CROP_HEIGHT);
+		return_value = centralcrop(&image, INPUT_FILE);
+		if (return_value != RETURN_SUCCESS)
+		{
+			printf("\e[31mError executing 'centralcrop', exiting program...\e[0m\n");
+			return (return_value);
+		}
 	}
-
-	// find size of image, malloc for it
-	image_init(&image, fd);
-	
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error: Could not open file %s\n", argv[1]);
-		return (1);
-	}
-
-	// read from csv file into image 'pixel'data
-	image_readCsv(&image, fd);
-
-	close(fd);
-
-	findCenters(&image);
-
-	exportAllObjects(&image, argv[1]);
-
-	// ascii preview of image and cropped copies
-	if (argc == 3 && (!ft_strncmp(argv[2], "-v", 3) || !ft_strncmp(argv[2], "--verbose", 10)))
-		image_printInfo(&image);
-
-	clear(&image);
-
-	return (0);
+	return (RETURN_SUCCESS);
 }
