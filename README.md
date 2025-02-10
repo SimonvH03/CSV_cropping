@@ -1,8 +1,8 @@
 # CSV_cropping
 Automatically detects objects within scan result, creates cropped copies of csv file.
 
-# How to use
-### If this is your first installation:
+# How to install/update
+### Install for the first time:
 - open a terminal (in VSCode) and run the command:
 ```
 git clone https://github.com/SimonvH03/CSV_cropping.git
@@ -13,7 +13,7 @@ cd CSV_cropping
 pwd
 ```
 
-### If you already have this repository cloned:
+### or Update the version you already have:
 - open a terminal at the repository and run the commands:
 > don't forget to include the '.'  
 > if pwd does not show the location of this repository, navigate there with the command 'cd'
@@ -24,6 +24,7 @@ git stash
 git pull
 ```
 
+# How to use the tool
 - place files you want to crop in the directory ./data or wherever you like
 
 - visit config.h and read it carefully
