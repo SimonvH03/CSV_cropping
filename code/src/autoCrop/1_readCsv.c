@@ -8,6 +8,8 @@ static int	image_size(t_image *image, int fd)
 		return (memory_error());
 	// printf("ENTRY LINE 0:\n%s\n", entry);
 
+	image->width = 0;
+	image->height = 0;
 	for (int i = 0; entry != NULL; i++)
 	{
 		free(entry);
@@ -18,19 +20,26 @@ static int	image_size(t_image *image, int fd)
 		if (temp == NULL)
 			return (RETURN_ERROR);
 		int x = ft_atoi(temp);
+		if (i == 0)
+			image->coordstart[0] = x;
 		free(temp);
 		temp = ft_strdup_d(ft_strchr(entry, ',') + 1, ',');
 		if (temp == NULL)
 			return (RETURN_ERROR);
 		int y = ft_atoi(temp);
+		if (i == 0)
+			image->coordstart[1]= y;
 		free(temp);
 		if (x > image->width)
 			image->width = x;
 		if (y > image->height)
 			image->height = y;
 	}
-	image->width++;
-	image->height++;
+	image->width += 1 - image->coordstart[0];
+	image->height += 1 - image->coordstart[1];
+	// printf("Input File has size %d x %d\n", image->width, image->height);
+	// printf("first pixel has coordinates %d, %d\n", image->coordstart[0], image->coordstart[1]); // debug
+	return (RETURN_SUCCESS);
 }
 
 int	image_init(t_image *image, char *filename)
@@ -42,10 +51,6 @@ int	image_init(t_image *image, char *filename)
 
 	if (fd == -1)
 		return (RETURN_FAILURE);
-	image->width = 0;
-	image->height = 0;
-	image->validCount = 0;
-	image->valids = NULL;
 
 	if (return_value = image_size(image, fd) != RETURN_SUCCESS)
 		return (return_value);
@@ -99,10 +104,10 @@ int	image_readCsv(t_image *image, char *filename)
 		if (entry == NULL)
 			break;
 		char *temp = ft_strdup_d(entry, ',');
-		int x = ft_atoi(temp);
+		int x = ft_atoi(temp) - image->coordstart[0];
 		free(temp);
 		temp = ft_strdup_d(ft_strchr(entry, ',') + 1, ',');
-		int y = ft_atoi(temp);
+		int y = ft_atoi(temp) - image->coordstart[1];
 		free(temp);
 		ret = pixel_isStrawberry(image, entry, x, y);
 		if (ret == -1)

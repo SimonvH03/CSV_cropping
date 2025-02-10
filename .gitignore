@@ -1,4 +1,4 @@
-resources/
+data/*
 *.o
 *.a
 *.csv

@@ -30,7 +30,7 @@ int	main(void)
 		printf("⚙️ \e[33m Parameters:\e[0m\nWavelength:\tindex %d\nSensitivity:\t%s\nObject Size:\t%d pixels\n",
 			WAVELENGTH_THRESHOLD, SENSITIVITY_THRESHOLD, OBJECT_SIZE_THRESHOLD);
 		if (CROP_SIZE_LIMIT == true)
-			printf("File Size:\t%d x %d pixels\n\n", MAX_CROP_SIZE, MAX_CROP_SIZE);
+			printf("Export Size:\t%d x %d pixels\n\n", MAX_CROP_SIZE, MAX_CROP_SIZE);
 		else
 			printf("File Size:\t n.a.\n\n");
 		return_value = autocrop(&image, INPUT_FILE);

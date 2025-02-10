@@ -16,6 +16,7 @@
 
 # define STRAWBERRY		1
 # define EMPTY 			0
+# define TAPE			-42
 
 // STRUCTS
 typedef struct s_image	t_image;
@@ -66,9 +67,9 @@ typedef struct s_image
 	int			width;
 	int			height;
 	short		**pixels;
+	int			coordstart[2];
 	t_seeker	seeker;
-	int			validCount;
-	t_object	*valids;
+	int			exportCount;
 }	t_image;
 
 

@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /**
- * @brief Duplicates a string up to a delimiter character.
+ * @brief Duplicates a string up to and including a delimiter character.
  *
  * This function duplicates the string @p str up to the first occurrence
  * 	of the delimiter character @p delim.

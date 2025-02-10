@@ -46,28 +46,6 @@ static t_seeker	*initSeeker(t_image *image)
 	return (cs);
 }
 
-static int	addValidObject(t_image *image, t_object *object)
-{
-	t_object	*new;
-
-	new = malloc(sizeof(t_object));
-	if (object == NULL)
-		return (memory_error());
-	new->label = ++image->validCount;
-	new->centerX = object->centerX;
-	new->centerY = object->centerY;
-	new->maxX = object->maxX;
-	new->maxY = object->maxY;
-	new->minX = object->minX;
-	new->minY = object->minY;
-	new->size = object->size;
-	new->sumX = object->sumX;
-	new->sumY = object->sumY;
-	new->next = image->valids;
-	image->valids = new;
-	return (RETURN_SUCCESS);
-}
-
 static int	floodFill(t_seeker *cs, t_object *object, int startX, int startY)
 {
 	int maxSize = cs->ref_image->width * cs->ref_image->height;
@@ -127,22 +105,21 @@ static int	floodFill(t_seeker *cs, t_object *object, int startX, int startY)
 	return (RETURN_SUCCESS);
 }
 
-static void	drawCenter(t_image *image, t_object *object)
+static int	tape_warning(int level)
 {
-	for (int i = -(SCALE / 2); i <= (SCALE / 2); i++)
-	{
-		for (int j = -(SCALE / 2); j <= (SCALE / 2); j++)
-		{
-			if (!(object->centerY + i < 0 || object->centerY + i >= image->height
-				|| object->centerX + j < 0 || object->centerX + j >= image->width))
-				image->pixels[object->centerY + i][object->centerX + j] = -1;
-		}
-	}
+	if (level <= 2)
+		return (2);
+	if (level <= 5)
+		return (3);
+	return (1);
 }
 
 static int	reportCenters(t_seeker *cs, t_image *image)
 {
-	printf("\nDetected %d objects.\n", cs->objectCount - 1);
+	int	return_value;
+	int	validObjectCount = 0;
+
+	printf("Detected %d objects.\n", cs->objectCount - 1);
 	for (t_object *object = cs->objects; object != NULL; object = object->next)
 	{
 		int	check = 0;
@@ -155,36 +132,32 @@ static int	reportCenters(t_seeker *cs, t_image *image)
 		if (cs->visited[image->height - 1][image->width / 2] == object->label) check++;
 		if (cs->visited[image->height - 1][image->width - 1] == object->label) check++;
 		if (check > 0)
-			printf("Object %d is probably tape: detected on %d/8 corners or edges\n", object->label, check);
+		{
+			printf("\e[33mObject #%d may be tape:\e[0m detected on \e[3%dm%d/8\e[0m corners or edges\n", object->label, tape_warning(check), check);
+			object->label = TAPE;
+		}
 		else
 		{
-			printf("Object %d with center (%d, %d) and bounding box (%d, %d) <> (%d, %d)\n",
+			printf("Object #%d with center (%d, %d) and bounding box (%d, %d) <> (%d, %d)\n",
 				object->label, object->centerY, object->centerX, object->minY, object->minX, object->maxY, object->maxX);
-			drawCenter(image, object);
-			if (addValidObject(image, object) == RETURN_ERROR)
-				return (RETURN_ERROR);
+			object->label = ++validObjectCount;
 		}
 	}
 	return (RETURN_SUCCESS);
 }
 
+// objects still in use by t_image
 static void	clear(t_seeker *cs)
 {
 	for (int i = 0; i < cs->ref_image->height; i++)
 		free(cs->visited[i]);
 	free(cs->visited);
-	t_object *object = cs->objects;
-	while (object)
-	{
-		t_object *next = object->next;
-		free(object);
-		object = next;
-	}
 }
 
 // seeker named cs (centerSeeker) for brevity
 int findObjects(t_image *image)
 {
+	int			return_value;
 	t_seeker	*cs = initSeeker(image);
 
 	if (cs == NULL)
@@ -195,12 +168,10 @@ int findObjects(t_image *image)
 		{
 			if (image->pixels[y][x] == STRAWBERRY && cs->visited[y][x] == 0)
 			{
-				// printf("seeking object on (%d, %d)...", y, x);
+				// printf("seeking object on (%d, %d)...", y, x); // debug
 				t_object *object = newObject(cs->objectCount, cs->objects);
-				object->label = cs->objectCount;
-				object->sumX = 0;
-				object->sumY = 0;
-				object->size = 0;
+				if (object == NULL)
+					return (RETURN_ERROR);
 
 				if (floodFill(cs, object, x, y) == RETURN_ERROR)
 					return (RETURN_ERROR);
@@ -209,22 +180,20 @@ int findObjects(t_image *image)
 					object->centerY = object->sumY / object->size;
 					object->centerX = object->sumX / object->size;
 					cs->objectCount++;
-					// printf("found with size %d (%d, %d)\n", object->size, object->sumY, object->sumX);
 					cs->objects = object;
+					// printf("found with size %d (%d, %d)\n", object->size, object->sumY, object->sumX); // debug
 				}
 				else
 				{
-					// printf("discarded with size %d\n", object->size);
+					// printf("discarded with size %d\n", object->size); // debug
 					free(object);
 				}
 			}
 		}
 	}
-	if (reportCenters(cs, image) == RETURN_ERROR)
-	{
-		clear(cs);
-		return (RETURN_ERROR);
-	}
+	return_value = reportCenters(cs, image);
 	clear(cs);
-	return (cs->objectCount);
+	if (return_value != RETURN_SUCCESS)
+		return (return_value);
+	return (cs->objectCount - 1);
 }
