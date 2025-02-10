@@ -31,7 +31,7 @@ git pull
 > change defined constant values in config.h to set parameters.
 
 - make sure your input file is defined as INPUT_FILE
-> The file path can be "./data/inputfile.csv" or "myfolder/inputfile.csv" depending on where you put it
+> The file path can be something like "./data/inputfile.csv" or "myfolder/inputfile.csv" depending on where you put it
 - run the program with the provided script
 ```
 bash run.sh
