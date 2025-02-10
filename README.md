@@ -14,10 +14,11 @@ pwd
 - place files you want to crop in the directory ./data or wherever you like
 
 - visit config.h and read it carefully
+> change defined constant values in config.h to set parameters.
 
 - run the program with the provided script
 ```
 bash run.sh
 ```
 
-# change defined constant values in config.h to set parameters.
+# Understanding the Config.h file
