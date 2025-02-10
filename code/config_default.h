@@ -8,14 +8,15 @@
 // Using the program with the same input file multiple times will overwrite the previous output files.
 
 // CONFIGURATION
-// changing values of these defined constants will change the behavior of the program.
-// NEVER change the NAME of a constant, only the values.
-// NEVER include symbols like #, ", <, >, = or ; in the values of the defined constants
-// MAKE SURE to keep values of the same TYPE, e.g. >200< can not become >true< , and >"0.05"< can not become >0.05<
+// changing values of these defined constants will change the behaviour of the program.
+// NEVER change the NAME of a constant, only the value.
+// NEVER include symbols like #, <, >, = or ; in the values of the defined constants
+// The comments (me, here, the green text you're reading) will refer to values with >these bois< around them, you will not
+// MAKE SURE to keep values the same TYPE, e.g. >200< can not become >true< , and >"0.05"< can not become >0.05<
 // set to >true< to enable, >false< to disable. (without the > and <, in case you missed it)
 
-// # define INPUT_FILE			"data/test_crop_1.csv"
-# define INPUT_FILE			"data/test.csv"
+// reminder that absolute paths are jank, use the relative path
+# define INPUT_FILE			"data/myinputfilenamegoeshere.csv"
 
 // SET CROPPING MODE
 // if >true<, find objects of interest based on wavelength, size, and sensitivity THRESHOLDS
@@ -50,9 +51,9 @@
 		// minimum size (#of orthognonally adjacent pixels) of object to be considered an object of interest
 		# define OBJECT_SIZE_THRESHOLD	1000
 
-# define ALWAYS_SKIP_PREVIEW			false
 
-// scale for output preview
+// Auto detection output includes optional preview of exported files, force skip or adjust size (max size 40 recommended)
+# define ALWAYS_SKIP_PREVIEW			false
 # define PREVIEW_SIZE					32
 
 #endif
