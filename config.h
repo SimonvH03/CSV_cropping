@@ -8,7 +8,7 @@
 // Using the program with the same input file multiple times will overwrite the previous output files.
 
 // CONFIGURATION
-// changing values of these defined constants will change the behavior of the program.
+// changing values of these defined constants will change the behaviour of the program.
 // NEVER change the NAME of a constant, only the values.
 // NEVER include symbols like #, ", <, >, = or ; in the values of the defined constants
 // MAKE SURE to keep values of the same TYPE, e.g. >200< can not become >true< , and >"0.05"< can not become >0.05<
