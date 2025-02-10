@@ -51,11 +51,8 @@ static int	addValidObject(t_image *image, t_object *object)
 	t_object	*new;
 
 	new = malloc(sizeof(t_object));
-	if (!object)
-	{
-		printf("Error: Memory allocation failed!\n");
-		return (RETURN_ERROR);
-	}
+	if (object == NULL)
+		return (memory_error());
 	new->label = ++image->validCount;
 	new->centerX = object->centerX;
 	new->centerY = object->centerY;

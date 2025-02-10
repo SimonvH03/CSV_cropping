@@ -53,10 +53,10 @@ static int	confirm_export(t_image *image, char *filename)
 	int		i = 1;
 
 	announceCropMode();
-	printf("%d Objects found:", image->validCount);
+	printf("🔍 %d Objects found:", image->validCount);
 	for (t_object *object = image->valids; object != NULL; object = object->next)
 	{
-		printf("Object %d (labeled %d) has size %d\nDo you want to export it to CSV? (y/n)",
+		printf("📝 Object %d (labeled %d) has size %d\n📤 Do you want to export it to CSV? (y/n)",
 			i, object->label, object->size);
 		while (1)
 		{
@@ -88,7 +88,7 @@ static void	confirm_preview(t_image *image)
 
 	while (1)
 	{
-		printf("Do you wish to see a preview of the exported objects? (y/n)\n");
+		printf("🔍 Do you want to see a preview of the exported objects? (y/n)\n");
 		if (scanf(" %c", &response) == -1)
 			return ;
 		if (response == 'y' || response == 'Y')

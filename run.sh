@@ -11,11 +11,13 @@ if [ ! -f "./code/autocrop" ]; then
 	exit 1
 fi
 
-echo "✅ Compilation successful! Running autocrop"
+echo "✅ Compilation successful!"
 
 # Run the program and catch the exit/return code
 ./code/autocrop
 exit_code=$?
+
+echo "Program completed with exit code $exit_code"
 
 # Handle different exit codes
 case $exit_code in
@@ -26,10 +28,10 @@ case $exit_code in
 		echo "✅ Program completed successfully!"
 		;;
 	1)
-		echo "⚠️ Error: Program Failed, please revise or restore Configuration"
+		echo "⚠️  Error: Program Failed, please revise or restore Configuration"
 		;;
 	*)
-		echo "⚠️ Unknown error code ($exit_code), freak out"
+		echo "🔥 Unknown 🔥 error 🔥 code 🔥 ($exit_code) 🔥 Freak 🔥 out 🔥"
 		;;
 esac
 

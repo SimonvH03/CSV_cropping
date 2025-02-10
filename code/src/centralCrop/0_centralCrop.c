@@ -74,7 +74,7 @@ int centralcrop(t_image *image, char *filename)
 		return (RETURN_FAILURE);
 
 	determineCropSize(&cropRange, image->height, image->width);
-	printf("Central Square will be of size (%d x %d)\nDo you want to export it to CSV? (y/n)",
+	printf("📝 Central Square will be of size (%d x %d)\n📤 Do you want to export it to CSV? (y/n)",
 		(cropRange.maxX - cropRange.minX), (cropRange.maxY - cropRange.minY));
 	while (1)
 	{

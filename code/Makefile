@@ -33,11 +33,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) -o $@ -c $< -I .
 
 $(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
-	@echo "  make: compiling $(NAME)..."
+	@echo "   make: compiling $(NAME)..."
 	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) -lm
 
 clean:
-	@echo "  make: cleaning..."
+	@echo "   make: cleaning..."
 	@rm -f $(OBJ)
 	@make -C $(LFTDIR) clean -s
 
