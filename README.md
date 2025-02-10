@@ -15,11 +15,13 @@ git checkout .
 git stash
 git pull
 ```
+
 - navigate to the cloned directory in your terminal
 ```
 cd CSV_cropping
 pwd
 ```
+
 - place files you want to crop in the directory ./data or wherever you like
 
 - visit config.h and read it carefully
