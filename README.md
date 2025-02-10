@@ -6,27 +6,18 @@ Automatically detects objects within scan result, creates cropped copies of csv 
 ```
 git clone https://github.com/SimonvH03/CSV_cropping.git
 ```
-- navigate to the directory 'code' in your terminal
+- navigate to the cloned directory in your terminal
 ```
 cd CSV_cropping
-cd code
 pwd
 ```
-- place files you want to crop in the directory ./code or wherever you like
+- place files you want to crop in the directory ./data or wherever you like
 
-- run the executbale 'crop' with your input file
-> (exclude the '<' and '>' symbols, everything inside '{ }' is optional, including the symbols)
-> filename may instead be the relative or absolute path to the file
-> always put the filename in quotes " or ' if it has any spaces or other non-alphanumerical characters
+- visit config.h and read it carefully
+
+- run the program with the provided script
 ```
-./crop <filename> {-v} {>output}
+bash run.sh
 ```
 
-> using the flag -v (or --verbose) adds an ascii preview to the output, it shows the borders of the cropped exported csv files.
-> it's recommended to also redirect the output when using this flag
-
-- change defined values in config.h to set parameters.
-> !!! to recompile after making changes to the configuration run the command:
-```
-make (all, re, clean, fclean)
-```
+# change defined constant values in config.h to set parameters.
