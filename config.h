@@ -51,9 +51,9 @@
 		// minimum size (#of orthognonally adjacent pixels) of object to be considered an object of interest
 		# define OBJECT_SIZE_THRESHOLD	1000
 
-# define ALWAYS_SKIP_PREVIEW			false
 
-// scale for output preview
+// Auto detection output includes optional preview of exported files, force sip or adjust size (max size 40 recommended)
+# define ALWAYS_SKIP_PREVIEW			false
 # define PREVIEW_SIZE					32
 
 #endif
