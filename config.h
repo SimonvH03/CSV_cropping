@@ -52,7 +52,7 @@
 		# define OBJECT_SIZE_THRESHOLD	1000
 
 
-// Auto detection output includes optional preview of exported files, force sip or adjust size (max size 40 recommended)
+// Auto detection output includes optional preview of exported files, force skip or adjust size (max size 40 recommended)
 # define ALWAYS_SKIP_PREVIEW			false
 # define PREVIEW_SIZE					32
 
