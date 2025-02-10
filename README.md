@@ -2,7 +2,7 @@
 Automatically detects objects within scan result, creates cropped copies of csv file.
 
 # How to use
-### fresh install:
+### first install:
 - open a terminal (in VSCode) and run the command:
 ```
 git clone https://github.com/SimonvH03/CSV_cropping.git
