@@ -32,14 +32,14 @@ int	main(void)
 		if (CROP_SIZE_LIMIT == true)
 			printf("Export Size:\t%d x %d pixels\n\n", MAX_CROP_SIZE, MAX_CROP_SIZE);
 		else
-			printf("File Size:\t n.a.\n\n");
+			printf("Export Size:\t n.a.\n\n");
 		return_value = autocrop(&image, INPUT_FILE);
 	}
 	else
 	{
 		printf("\n🔍 Running Program in CENTRAL_SQUARE mode\n");
 		printf("📄 \e[33mInput File: \e[32m>> %s <<\e[0m\n", INPUT_FILE);
-		printf("\e[33m⚙️  Parameters:\e[0m\nFile Size:\t%d x %d\n\n", CROP_WIDTH, CROP_HEIGHT);
+		printf("\e[33m⚙️  Parameters:\e[0m\nExport Size:\t%d x %d\n\n", CROP_WIDTH, CROP_HEIGHT);
 		return_value = centralcrop(&image, INPUT_FILE);
 	}
 	if (return_value == RETURN_ERROR)
